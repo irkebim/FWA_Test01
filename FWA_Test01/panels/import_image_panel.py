@@ -10,4 +10,13 @@ class IRKEBIM_PT_import_image_panel(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+        scene = context.scene
+
+        if not hasattr(scene, "plane_settings"):
+            layout.label(text="Scene.plane_settings 없음 ❗")
+            return
+
+        layout.prop(scene.plane_settings, "plane_width")
+        layout.prop(scene.plane_settings, "plane_opacity")
+        layout.separator()
         layout.operator("irkebim.import_image", text="Import Image")
